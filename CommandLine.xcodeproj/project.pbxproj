@@ -8,6 +8,21 @@
 
 /* Begin PBXBuildFile section */
 		2F469A0522D5E22200A93D64 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F469A0422D5E22200A93D64 /* main.swift */; };
+		2FFE07A922D739AA00693D63 /* ModesExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FFE079D22D739AA00693D63 /* ModesExtractor.swift */; };
+		2FFE07AA22D739AA00693D63 /* BackgroundColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FFE079E22D739AA00693D63 /* BackgroundColor.swift */; };
+		2FFE07AB22D739AA00693D63 /* CodesParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FFE079F22D739AA00693D63 /* CodesParser.swift */; };
+		2FFE07AC22D739AA00693D63 /* ControlCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FFE07A122D739AA00693D63 /* ControlCode.swift */; };
+		2FFE07AD22D739AA00693D63 /* StringGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FFE07A222D739AA00693D63 /* StringGenerator.swift */; };
+		2FFE07AE22D739AA00693D63 /* Rainbow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FFE07A322D739AA00693D63 /* Rainbow.swift */; };
+		2FFE07AF22D739AA00693D63 /* OutputTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FFE07A422D739AA00693D63 /* OutputTarget.swift */; };
+		2FFE07B022D739AA00693D63 /* XcodeColorsSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FFE07A522D739AA00693D63 /* XcodeColorsSupport.swift */; };
+		2FFE07B122D739AA00693D63 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FFE07A622D739AA00693D63 /* Style.swift */; };
+		2FFE07B222D739AA00693D63 /* String+Rainbow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FFE07A722D739AA00693D63 /* String+Rainbow.swift */; };
+		2FFE07B322D739AA00693D63 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FFE07A822D739AA00693D63 /* Color.swift */; };
+		2FFE07B822D739B100693D63 /* CommandLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FFE07B522D739B100693D63 /* CommandLine.swift */; };
+		2FFE07B922D739B100693D63 /* Option.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FFE07B622D739B100693D63 /* Option.swift */; };
+		2FFE07BA22D739B100693D63 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FFE07B722D739B100693D63 /* StringExtensions.swift */; };
+		2FFE07BC22D73F3100693D63 /* GitOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FFE07BB22D73F3100693D63 /* GitOperation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +40,22 @@
 /* Begin PBXFileReference section */
 		2F4699F422D5CE9500A93D64 /* CommandLine */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CommandLine; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F469A0422D5E22200A93D64 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		2FFE079D22D739AA00693D63 /* ModesExtractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModesExtractor.swift; sourceTree = "<group>"; };
+		2FFE079E22D739AA00693D63 /* BackgroundColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundColor.swift; sourceTree = "<group>"; };
+		2FFE079F22D739AA00693D63 /* CodesParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodesParser.swift; sourceTree = "<group>"; };
+		2FFE07A022D739AA00693D63 /* Rainbow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rainbow.h; sourceTree = "<group>"; };
+		2FFE07A122D739AA00693D63 /* ControlCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlCode.swift; sourceTree = "<group>"; };
+		2FFE07A222D739AA00693D63 /* StringGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringGenerator.swift; sourceTree = "<group>"; };
+		2FFE07A322D739AA00693D63 /* Rainbow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rainbow.swift; sourceTree = "<group>"; };
+		2FFE07A422D739AA00693D63 /* OutputTarget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutputTarget.swift; sourceTree = "<group>"; };
+		2FFE07A522D739AA00693D63 /* XcodeColorsSupport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XcodeColorsSupport.swift; sourceTree = "<group>"; };
+		2FFE07A622D739AA00693D63 /* Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
+		2FFE07A722D739AA00693D63 /* String+Rainbow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Rainbow.swift"; sourceTree = "<group>"; };
+		2FFE07A822D739AA00693D63 /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		2FFE07B522D739B100693D63 /* CommandLine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommandLine.swift; sourceTree = "<group>"; };
+		2FFE07B622D739B100693D63 /* Option.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Option.swift; sourceTree = "<group>"; };
+		2FFE07B722D739B100693D63 /* StringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
+		2FFE07BB22D73F3100693D63 /* GitOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitOperation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,9 +88,41 @@
 		2F469A0322D5E22200A93D64 /* CommandLine */ = {
 			isa = PBXGroup;
 			children = (
+				2FFE07B422D739B100693D63 /* CommandLineKit */,
+				2FFE079C22D739AA00693D63 /* Rainbow */,
 				2F469A0422D5E22200A93D64 /* main.swift */,
+				2FFE07BB22D73F3100693D63 /* GitOperation.swift */,
 			);
 			path = CommandLine;
+			sourceTree = "<group>";
+		};
+		2FFE079C22D739AA00693D63 /* Rainbow */ = {
+			isa = PBXGroup;
+			children = (
+				2FFE079D22D739AA00693D63 /* ModesExtractor.swift */,
+				2FFE079E22D739AA00693D63 /* BackgroundColor.swift */,
+				2FFE079F22D739AA00693D63 /* CodesParser.swift */,
+				2FFE07A022D739AA00693D63 /* Rainbow.h */,
+				2FFE07A122D739AA00693D63 /* ControlCode.swift */,
+				2FFE07A222D739AA00693D63 /* StringGenerator.swift */,
+				2FFE07A322D739AA00693D63 /* Rainbow.swift */,
+				2FFE07A422D739AA00693D63 /* OutputTarget.swift */,
+				2FFE07A522D739AA00693D63 /* XcodeColorsSupport.swift */,
+				2FFE07A622D739AA00693D63 /* Style.swift */,
+				2FFE07A722D739AA00693D63 /* String+Rainbow.swift */,
+				2FFE07A822D739AA00693D63 /* Color.swift */,
+			);
+			path = Rainbow;
+			sourceTree = "<group>";
+		};
+		2FFE07B422D739B100693D63 /* CommandLineKit */ = {
+			isa = PBXGroup;
+			children = (
+				2FFE07B522D739B100693D63 /* CommandLine.swift */,
+				2FFE07B622D739B100693D63 /* Option.swift */,
+				2FFE07B722D739B100693D63 /* StringExtensions.swift */,
+			);
+			path = CommandLineKit;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -72,6 +135,7 @@
 				2F4699F022D5CE9500A93D64 /* Sources */,
 				2F4699F122D5CE9500A93D64 /* Frameworks */,
 				2F4699F222D5CE9500A93D64 /* CopyFiles */,
+				2FFE07BD22D740AF00693D63 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -114,12 +178,47 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		2FFE07BD22D740AF00693D63 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\ncp $BUILT_PRODUCTS_DIR/$PRODUCT_NAME /usr/local/bin/yzf\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		2F4699F022D5CE9500A93D64 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2FFE07B822D739B100693D63 /* CommandLine.swift in Sources */,
 				2F469A0522D5E22200A93D64 /* main.swift in Sources */,
+				2FFE07BC22D73F3100693D63 /* GitOperation.swift in Sources */,
+				2FFE07B922D739B100693D63 /* Option.swift in Sources */,
+				2FFE07AA22D739AA00693D63 /* BackgroundColor.swift in Sources */,
+				2FFE07AC22D739AA00693D63 /* ControlCode.swift in Sources */,
+				2FFE07A922D739AA00693D63 /* ModesExtractor.swift in Sources */,
+				2FFE07AD22D739AA00693D63 /* StringGenerator.swift in Sources */,
+				2FFE07B322D739AA00693D63 /* Color.swift in Sources */,
+				2FFE07AF22D739AA00693D63 /* OutputTarget.swift in Sources */,
+				2FFE07B022D739AA00693D63 /* XcodeColorsSupport.swift in Sources */,
+				2FFE07B222D739AA00693D63 /* String+Rainbow.swift in Sources */,
+				2FFE07AB22D739AA00693D63 /* CodesParser.swift in Sources */,
+				2FFE07BA22D739B100693D63 /* StringExtensions.swift in Sources */,
+				2FFE07AE22D739AA00693D63 /* Rainbow.swift in Sources */,
+				2FFE07B122D739AA00693D63 /* Style.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

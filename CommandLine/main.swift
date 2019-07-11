@@ -8,27 +8,48 @@
 
 import Foundation
 
-print("Hello, World!")
+let cli = CommandLine()
+
+cli.formatOutput = { s, type in
+    var str: String
+    switch(type) {
+    case .error:
+        str = s.red.bold
+    case .optionFlag:
+        str = s.green.underline
+    case .optionHelp:
+        str = s.blue
+    default:
+        str = s
+    }
+
+    return cli.defaultFormat(s: str, type: type)
+}
+
+let help = BoolOption(shortFlag: "h", longFlag: "help",
+                      helpMessage: "-h --help，帮助信息")
+
+let git_add_tag = StringOption(longFlag: "git_add_tag",
+                               helpMessage: "--git_add_tag [tag]，给 git 添加 tag，已存在则删除原有的再次添加")
 
 
+cli.addOptions(help)
+cli.addOptions(git_add_tag)
 
-let p = Process()
-p.launchPath = "/bin/bash"
-let cmd = "echo '输入路径:'"
-p.arguments = ["-c", cmd]
-p.launch()
+do {
+    try cli.parse()
+} catch {
+    cli.printUsage(error)
+    exit(EX_USAGE)
+}
 
-let keyboard = FileHandle.standardInput
-let inputData = keyboard.availableData
-var strData = String(data: inputData, encoding: String.Encoding.utf8)!
-strData.removeLast()
+if Swift.CommandLine.arguments.count == 1 || help.value {
+    cli.printUsage()
+    exit(EX_OK)
+}
 
 
-let p2 = Process()
-p2.launchPath = "/bin/bash"
-let cmd2 = "path=\(strData);dir=${path%/*};file=${path##*/};echo $dir;echo $file"
-
-print(cmd2)
-
-p2.arguments = ["-c", cmd2]
-p2.launch()
+/* Git Operation */
+if let value = git_add_tag.value {
+    GitOperation.addTag(value)
+}
