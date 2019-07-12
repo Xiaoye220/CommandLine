@@ -18,17 +18,17 @@ struct GitOperation {
         tag=\(tag)
         
         git pull --tags
-        existTag=`git tag -l \\| grep $tag`
+        existTag=$(git tag -l | grep $tag)
         
-        if [ "$existTag" != "" ]
+        if [ "${existTag}" != "" ]
         then
         
-        git tag -d $tag
-        git push origin :refs/tags/$tag
+        git tag -d ${tag}
+        git push origin :refs/tags/${tag}
         
         fi
         
-        git tag -a $tag -m $tag
+        git tag -a ${tag} -m ${tag}
         git push origin --tags
         """
         
