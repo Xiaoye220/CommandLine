@@ -8,9 +8,18 @@
 
 import Foundation
 
-struct GitOperation {
+class GitOperation: NSObject, MyOperation {
     
-    static func addTag(_ tag: String) {
+    public var options: [MyOption] = []
+    
+    override init() {
+        let git_addTag = StringOption(longFlag: "git_addTag",
+                                      helpMessage: "--git_addTag [tag]，给 git 添加 tag，已存在则删除原有的再次添加")
+        
+        options.append(MyOption(option: git_addTag, sel: #selector(addTag(_:))))
+    }
+    
+    @objc func addTag(_ tag: String) {
         let process = Process()
         process.launchPath = "/bin/bash"
         

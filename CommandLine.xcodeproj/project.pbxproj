@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		2F469A0522D5E22200A93D64 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F469A0422D5E22200A93D64 /* main.swift */; };
+		2F6F63E122FD212600D6A967 /* ShellOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6F63E022FD212600D6A967 /* ShellOperation.swift */; };
+		2F6F63E322FD232E00D6A967 /* MyOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6F63E222FD232E00D6A967 /* MyOption.swift */; };
+		2F6F63E522FD252B00D6A967 /* MyOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6F63E422FD252B00D6A967 /* MyOperation.swift */; };
 		2FFE07A922D739AA00693D63 /* ModesExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FFE079D22D739AA00693D63 /* ModesExtractor.swift */; };
 		2FFE07AA22D739AA00693D63 /* BackgroundColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FFE079E22D739AA00693D63 /* BackgroundColor.swift */; };
 		2FFE07AB22D739AA00693D63 /* CodesParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FFE079F22D739AA00693D63 /* CodesParser.swift */; };
@@ -40,6 +43,9 @@
 /* Begin PBXFileReference section */
 		2F4699F422D5CE9500A93D64 /* CommandLine */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CommandLine; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F469A0422D5E22200A93D64 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		2F6F63E022FD212600D6A967 /* ShellOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShellOperation.swift; sourceTree = "<group>"; };
+		2F6F63E222FD232E00D6A967 /* MyOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyOption.swift; sourceTree = "<group>"; };
+		2F6F63E422FD252B00D6A967 /* MyOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyOperation.swift; sourceTree = "<group>"; };
 		2FFE079D22D739AA00693D63 /* ModesExtractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModesExtractor.swift; sourceTree = "<group>"; };
 		2FFE079E22D739AA00693D63 /* BackgroundColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundColor.swift; sourceTree = "<group>"; };
 		2FFE079F22D739AA00693D63 /* CodesParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodesParser.swift; sourceTree = "<group>"; };
@@ -92,6 +98,9 @@
 				2FFE079C22D739AA00693D63 /* Rainbow */,
 				2F469A0422D5E22200A93D64 /* main.swift */,
 				2FFE07BB22D73F3100693D63 /* GitOperation.swift */,
+				2F6F63E022FD212600D6A967 /* ShellOperation.swift */,
+				2F6F63E222FD232E00D6A967 /* MyOption.swift */,
+				2F6F63E422FD252B00D6A967 /* MyOperation.swift */,
 			);
 			path = CommandLine;
 			sourceTree = "<group>";
@@ -206,6 +215,8 @@
 				2FFE07B822D739B100693D63 /* CommandLine.swift in Sources */,
 				2F469A0522D5E22200A93D64 /* main.swift in Sources */,
 				2FFE07BC22D73F3100693D63 /* GitOperation.swift in Sources */,
+				2F6F63E522FD252B00D6A967 /* MyOperation.swift in Sources */,
+				2F6F63E122FD212600D6A967 /* ShellOperation.swift in Sources */,
 				2FFE07B922D739B100693D63 /* Option.swift in Sources */,
 				2FFE07AA22D739AA00693D63 /* BackgroundColor.swift in Sources */,
 				2FFE07AC22D739AA00693D63 /* ControlCode.swift in Sources */,
@@ -216,6 +227,7 @@
 				2FFE07B022D739AA00693D63 /* XcodeColorsSupport.swift in Sources */,
 				2FFE07B222D739AA00693D63 /* String+Rainbow.swift in Sources */,
 				2FFE07AB22D739AA00693D63 /* CodesParser.swift in Sources */,
+				2F6F63E322FD232E00D6A967 /* MyOption.swift in Sources */,
 				2FFE07BA22D739B100693D63 /* StringExtensions.swift in Sources */,
 				2FFE07AE22D739AA00693D63 /* Rainbow.swift in Sources */,
 				2FFE07B122D739AA00693D63 /* Style.swift in Sources */,

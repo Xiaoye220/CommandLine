@@ -28,13 +28,16 @@ cli.formatOutput = { s, type in
 
 let help = BoolOption(shortFlag: "h", longFlag: "help",
                       helpMessage: "-h --help，帮助信息")
-
-let git_add_tag = StringOption(longFlag: "git_add_tag",
-                               helpMessage: "--git_add_tag [tag]，给 git 添加 tag，已存在则删除原有的再次添加")
-
-
 cli.addOptions(help)
-cli.addOptions(git_add_tag)
+
+
+var operations: [MyOperation] = []
+operations.append(GitOperation())
+operations.append(ShellOperation())
+
+operations.forEach { operation in
+    operation.addOptions(to: cli)
+}
 
 do {
     try cli.parse()
@@ -50,6 +53,6 @@ if Swift.CommandLine.arguments.count == 1 || help.value {
 
 
 /* Git Operation */
-if let value = git_add_tag.value {
-    GitOperation.addTag(value)
+operations.forEach { operation in
+    operation.performOptions()
 }
