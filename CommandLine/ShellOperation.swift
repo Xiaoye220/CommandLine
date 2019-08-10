@@ -15,7 +15,7 @@ class ShellOperation: NSObject, MyOperation {
     
     override init() {
         let chmodOption = BoolOption(longFlag: "chmod",
-                                       helpMessage: "--chmod")
+                                       helpMessage: "--chmod 修改文件权限为可访问")
         options.append(MyOption(option: chmodOption, sel: #selector(chmod)))
     }
     
