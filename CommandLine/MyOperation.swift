@@ -27,8 +27,14 @@ extension MyOperation {
     
     func performOptions() {
         self.options.forEach { myOption in
-            if let value = myOption.value {
-                self.perform(myOption.sel, with: value)
+            if let boolOption = myOption.option as? BoolOption {
+                if boolOption.value {
+                    self.perform(myOption.sel, with: boolOption.value)
+                }
+            } else {
+                if let value = myOption.value {
+                    self.perform(myOption.sel, with: value)
+                }
             }
         }
     }
