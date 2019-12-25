@@ -34,6 +34,7 @@ cli.addOptions(help)
 var operations: [MyOperation] = []
 operations.append(GitOperation())
 operations.append(ShellOperation())
+operations.append(ChromiumOperation())
 
 operations.forEach { operation in
     operation.addOptions(to: cli)
