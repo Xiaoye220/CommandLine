@@ -13,13 +13,17 @@ class ChromiumOperation: NSObject, MyOperation {
     
     override init() {
         let setupGNOption = BoolOption(longFlag: "gn",
-                                       helpMessage: "Chromium setup GN")
+                                       helpMessage: "vpython ios/build/tools/setup-gn.py")
 
         let startGomaOption = BoolOption(longFlag: "goma",
-                                         helpMessage: "Chromium start Goma")
+                                         helpMessage: "vpython ~/Desktop/anaheim/tools/goma-mac/goma_ctl.py ensure_start")
+        let openXcodeOption = BoolOption(shortFlag: "o",
+                                         longFlag: "xcode",
+                                         helpMessage: "open Xcode")
 
         options.append(MyOption(option: setupGNOption, sel: #selector(setupGN)))
         options.append(MyOption(option: startGomaOption, sel: #selector(startGoma)))
+        options.append(MyOption(option: openXcodeOption, sel: #selector(openXcode)))
     }
     
     @objc func setupGN() {
@@ -27,7 +31,7 @@ class ChromiumOperation: NSObject, MyOperation {
         process.launchPath = "/bin/zsh"
 
         let cmd = """
-        vpython ~/Desktop/anaheim/src/ios/build/tools/setup-gn.py
+        vpython ios/build/tools/setup-gn.py
         """
 
         process.arguments = ["-c", cmd]
@@ -41,6 +45,19 @@ class ChromiumOperation: NSObject, MyOperation {
 
         let cmd = """
         vpython ~/Desktop/anaheim/tools/goma-mac/goma_ctl.py ensure_start
+        """
+
+        process.arguments = ["-c", cmd]
+        process.launch()
+        process.waitUntilExit()
+    }
+
+    @objc func openXcode() {
+        let process = Process()
+        process.launchPath = "/bin/zsh"
+
+        let cmd = """
+        open out/build/all.xcodeproj
         """
 
         process.arguments = ["-c", cmd]

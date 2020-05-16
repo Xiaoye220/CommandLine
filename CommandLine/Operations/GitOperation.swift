@@ -19,7 +19,7 @@ class GitOperation: NSObject, MyOperation {
 
         let msFormatOption = BoolOption(shortFlag: "f",
                                         longFlag: "format",
-                                        helpMessage: "MS format")
+                                        helpMessage: "git ms format --upstream=origin/master")
 
         let rebaseMasterOption = BoolOption(shortFlag: "r",
                                             longFlag: "rebase",
@@ -35,6 +35,8 @@ class GitOperation: NSObject, MyOperation {
         process.launchPath = "/bin/zsh"
         
         let cmd = """
+        export LANGUAGE=en_US.UTF-8
+
         tag=\(tag)
         
         git pull --tags
@@ -62,7 +64,7 @@ class GitOperation: NSObject, MyOperation {
         process.launchPath = "/bin/zsh"
 
         let cmd = """
-        cd ~/Desktop/anaheim/src
+        export LANGUAGE=en_US.UTF-8
         git ms format --upstream=origin/master
         """
 
@@ -76,6 +78,7 @@ class GitOperation: NSObject, MyOperation {
         process.launchPath = "/bin/zsh"
 
         let cmd = """
+        export LANGUAGE=en_US.UTF-8
         git fetch -p
         git branch -f master origin/master
         git rebase master
