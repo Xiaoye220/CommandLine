@@ -32,7 +32,7 @@ class GitOperation: NSObject, MyOperation {
     
     @objc func addTag(_ tag: String) {
         let process = Process()
-        process.launchPath = "/bin/bash"
+        process.launchPath = "/bin/zsh"
         
         let cmd = """
         tag=\(tag)
@@ -59,7 +59,7 @@ class GitOperation: NSObject, MyOperation {
 
     @objc func msFormat() {
         let process = Process()
-        process.launchPath = "/bin/bash"
+        process.launchPath = "/bin/zsh"
 
         let cmd = """
         cd ~/Desktop/anaheim/src
@@ -73,7 +73,7 @@ class GitOperation: NSObject, MyOperation {
 
     @objc func rebaseMaster() {
         let process = Process()
-        process.launchPath = "/bin/bash"
+        process.launchPath = "/bin/zsh"
 
         let cmd = """
         git fetch -p

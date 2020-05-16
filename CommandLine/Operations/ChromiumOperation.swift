@@ -24,7 +24,7 @@ class ChromiumOperation: NSObject, MyOperation {
     
     @objc func setupGN() {
         let process = Process()
-        process.launchPath = "/bin/bash"
+        process.launchPath = "/bin/zsh"
 
         let cmd = """
         vpython ~/Desktop/anaheim/src/ios/build/tools/setup-gn.py
@@ -37,7 +37,7 @@ class ChromiumOperation: NSObject, MyOperation {
 
     @objc func startGoma() {
         let process = Process()
-        process.launchPath = "/bin/bash"
+        process.launchPath = "/bin/zsh"
 
         let cmd = """
         vpython ~/Desktop/anaheim/tools/goma-mac/goma_ctl.py ensure_start

@@ -29,7 +29,7 @@ class ShellOperation: NSObject, MyOperation {
         strData.removeLast()
         
         let process = Process()
-        process.launchPath = "/bin/bash"
+        process.launchPath = "/bin/zsh"
 
         let cmd = """
         path=\(strData)
