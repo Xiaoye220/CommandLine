@@ -19,15 +19,20 @@ class GitOperation: NSObject, MyOperation {
 
         let msFormatOption = BoolOption(shortFlag: "f",
                                         longFlag: "format",
-                                        helpMessage: "git ms format --upstream=origin/master")
+                                        helpMessage: "git ms format --upstream=origin/main")
 
         let rebaseMasterOption = BoolOption(shortFlag: "r",
                                             longFlag: "rebase",
-                                            helpMessage: "rebase to master")
+                                            helpMessage: "rebase to main")
+      
+        let pushOption = BoolOption(shortFlag: "p",
+                                    longFlag: "push",
+                                    helpMessage: "push to origin")
 
         options.append(MyOption(option: addTagOption, sel: #selector(addTag(_:))))
         options.append(MyOption(option: msFormatOption, sel: #selector(msFormat)))
         options.append(MyOption(option: rebaseMasterOption, sel: #selector(rebaseMaster)))
+        options.append(MyOption(option: pushOption, sel: #selector(push)))
     }
     
     @objc func addTag(_ tag: String) {
@@ -65,7 +70,7 @@ class GitOperation: NSObject, MyOperation {
 
         let cmd = """
         export LANGUAGE=en_US.UTF-8
-        git ms format --upstream=origin/master
+        git ms format --upstream=origin/main
         """
 
         process.arguments = ["-c", cmd]
@@ -80,8 +85,25 @@ class GitOperation: NSObject, MyOperation {
         let cmd = """
         export LANGUAGE=en_US.UTF-8
         git fetch -p
-        git branch -f master origin/master
-        git rebase master
+        git branch -f main origin/main
+        git rebase main
+        """
+
+        process.arguments = ["-c", cmd]
+        process.launch()
+        process.waitUntilExit()
+    }
+  
+    @objc func push() {
+        let process = Process()
+        process.launchPath = "/bin/zsh"
+
+        let cmd = """
+        export LANGUAGE=en_US.UTF-8
+        git ms format --upstream=origin/main
+        git add -A
+        git commit --amend
+        git push -f
         """
 
         process.arguments = ["-c", cmd]

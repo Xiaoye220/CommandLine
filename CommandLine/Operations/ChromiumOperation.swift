@@ -13,7 +13,7 @@ class ChromiumOperation: NSObject, MyOperation {
     
     override init() {
         let setupGNOption = BoolOption(longFlag: "gn",
-                                       helpMessage: "vpython ios/build/tools/setup-gn.py")
+                                       helpMessage: "ios/build/tools/setup-gn.py")
 
         let startGomaOption = BoolOption(longFlag: "goma",
                                          helpMessage: "vpython ~/Desktop/anaheim/tools/goma-mac/goma_ctl.py ensure_start")
@@ -31,7 +31,7 @@ class ChromiumOperation: NSObject, MyOperation {
         process.launchPath = "/bin/zsh"
 
         let cmd = """
-        vpython ios/build/tools/setup-gn.py
+        ios/build/tools/setup-gn.py
         """
 
         process.arguments = ["-c", cmd]
