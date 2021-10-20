@@ -16,7 +16,11 @@ class ShellOperation: NSObject, MyOperation {
     override init() {
         let chmodOption = BoolOption(longFlag: "chmod",
                                      helpMessage: "修改文件权限为可访问")
+        let srcOption = BoolOption(shortFlag: "s",
+                                   longFlag: "src",
+                                   helpMessage: "cd to anaheim src")
         options.append(MyOption(option: chmodOption, sel: #selector(chmod)))
+        options.append(MyOption(option: srcOption, sel: #selector(cdSrc)))
     }
     
     @objc func chmod() {
@@ -47,4 +51,16 @@ class ShellOperation: NSObject, MyOperation {
         process.waitUntilExit()
     }
     
+    @objc func cdSrc() {
+        let process = Process()
+        process.launchPath = "/bin/zsh"
+
+        let cmd = """
+        cd ~/Desktop/anaheim/src
+        """
+
+        process.arguments = ["-c", cmd]
+        process.launch()
+        process.waitUntilExit()
+    }
 }
