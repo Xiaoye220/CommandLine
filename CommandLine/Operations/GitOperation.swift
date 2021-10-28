@@ -14,8 +14,8 @@ class GitOperation: NSObject, MyOperation {
     
     override init() {
         let addTagOption = StringOption(shortFlag: "a",
-                                        longFlag: "add_tag",
-                                        helpMessage: "--git_add_tag [tag]，给 git 添加 tag，已存在则删除原有的再次添加")
+                                        longFlag: "add-tag",
+                                        helpMessage: "--add-tag [tag]，给 git 添加 tag，已存在则删除原有的再次添加")
 
         let msFormatOption = BoolOption(shortFlag: "f",
                                         longFlag: "format",

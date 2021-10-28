@@ -23,12 +23,16 @@ class ChromiumOperation: NSObject, MyOperation {
       
         let buildOption = BoolOption(shortFlag: "b",
                                      longFlag: "build",
-                                     helpMessage: "Build chrome for simulator with 'autoninja all'")
+                                     helpMessage: "Build chrome for simulator with 'autoninja chrome'")
+      
+        let buildAllOption = BoolOption(longFlag: "build-all",
+                                        helpMessage: "Build chrome for simulator with 'autoninja all'")
 
         options.append(MyOption(option: setupGNOption, sel: #selector(setupGN)))
         options.append(MyOption(option: startGomaOption, sel: #selector(startGoma)))
         options.append(MyOption(option: openXcodeOption, sel: #selector(openXcode)))
         options.append(MyOption(option: buildOption, sel: #selector(buildChrome)))
+        options.append(MyOption(option: buildAllOption, sel: #selector(buildAllChrome)))
     }
     
     @objc func setupGN() {
@@ -77,6 +81,19 @@ class ChromiumOperation: NSObject, MyOperation {
         let cmd = """
         cd out/Debug-iphonesimulator
         autoninja chrome
+        """
+        process.arguments = ["-c", cmd]
+        process.launch()
+        process.waitUntilExit()
+    }
+  
+    @objc func buildAllChrome() {
+        let process = Process()
+        process.launchPath = "/bin/zsh"
+        
+        let cmd = """
+        cd out/Debug-iphonesimulator
+        autoninja all
         """
         process.arguments = ["-c", cmd]
         process.launch()
