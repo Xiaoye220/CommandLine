@@ -27,12 +27,25 @@ class ChromiumOperation: NSObject, MyOperation {
       
         let buildAllOption = BoolOption(longFlag: "build-all",
                                         helpMessage: "Build chrome for simulator with 'autoninja all'")
+        
+        let buildIPhoneOption = BoolOption(longFlag: "build-iphone",
+                                        helpMessage: "Build chrome for iphone with 'autoninja chrome'")
+      
+        let gclientSyncOption = BoolOption(shortFlag: "g",
+                                           longFlag: "gs",
+                                           helpMessage: "gclient sync -D -f")
+        
+        let runEdgeOption = BoolOption(longFlag: "run",
+                                       helpMessage: "1.gclient sync \n      2.setup gn \n      3.autoninja chrome")
 
         options.append(MyOption(option: setupGNOption, sel: #selector(setupGN)))
         options.append(MyOption(option: startGomaOption, sel: #selector(startGoma)))
         options.append(MyOption(option: openXcodeOption, sel: #selector(openXcode)))
         options.append(MyOption(option: buildOption, sel: #selector(buildChrome)))
         options.append(MyOption(option: buildAllOption, sel: #selector(buildAllChrome)))
+        options.append(MyOption(option: buildIPhoneOption, sel: #selector(buildIPhoneChrome)))
+        options.append(MyOption(option: gclientSyncOption, sel: #selector(gclientSync)))
+        options.append(MyOption(option: runEdgeOption, sel: #selector(runEdge)))
     }
     
     @objc func setupGN() {
@@ -94,6 +107,45 @@ class ChromiumOperation: NSObject, MyOperation {
         let cmd = """
         cd out/Debug-iphonesimulator
         autoninja all
+        """
+        process.arguments = ["-c", cmd]
+        process.launch()
+        process.waitUntilExit()
+    }
+    
+    @objc func buildIPhoneChrome() {
+        let process = Process()
+        process.launchPath = "/bin/zsh"
+        
+        let cmd = """
+        cd out/Debug-iphoneos
+        autoninja chrome
+        """
+        process.arguments = ["-c", cmd]
+        process.launch()
+        process.waitUntilExit()
+    }
+    
+    @objc func gclientSync() {
+        let process = Process()
+        process.launchPath = "/bin/zsh"
+        
+        let cmd = """
+        gclient sync -D -f
+        """
+        process.arguments = ["-c", cmd]
+        process.launch()
+        process.waitUntilExit()
+    }
+    
+    @objc func runEdge() {
+        let process = Process()
+        process.launchPath = "/bin/zsh"
+        
+        let cmd = """
+        yzf --gs
+        yzf --gn
+        yzf -b
         """
         process.arguments = ["-c", cmd]
         process.launch()
