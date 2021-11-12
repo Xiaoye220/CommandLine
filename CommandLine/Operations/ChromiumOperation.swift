@@ -25,10 +25,10 @@ class ChromiumOperation: NSObject, MyOperation {
                                      longFlag: "build",
                                      helpMessage: "Build chrome for simulator with 'autoninja chrome'")
       
-        let buildAllOption = BoolOption(longFlag: "build-all",
+        let buildAllOption = BoolOption(longFlag: "ba",
                                         helpMessage: "Build chrome for simulator with 'autoninja all'")
         
-        let buildIPhoneOption = BoolOption(longFlag: "build-iphone",
+        let buildIPhoneOption = BoolOption(longFlag: "bi",
                                         helpMessage: "Build chrome for iphone with 'autoninja chrome'")
       
         let gclientSyncOption = BoolOption(shortFlag: "g",
