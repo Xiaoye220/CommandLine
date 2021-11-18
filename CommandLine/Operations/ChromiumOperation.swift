@@ -36,8 +36,11 @@ class ChromiumOperation: NSObject, MyOperation {
                                            helpMessage: "gclient sync -D -f")
         
         let runEdgeOption = BoolOption(longFlag: "run",
-                                       helpMessage: "1.gclient sync \n      2.setup gn \n      3.autoninja chrome")
+                                       helpMessage: "1.gclient sync \n      2.autoninja chrome")
 
+        let runEdgeAllOption = BoolOption(longFlag: "run-all",
+                                          helpMessage: "1.gclient sync \n      2.setup gn \n      3.autoninja chrome")
+      
         options.append(MyOption(option: setupGNOption, sel: #selector(setupGN)))
         options.append(MyOption(option: startGomaOption, sel: #selector(startGoma)))
         options.append(MyOption(option: openXcodeOption, sel: #selector(openXcode)))
@@ -46,6 +49,7 @@ class ChromiumOperation: NSObject, MyOperation {
         options.append(MyOption(option: buildIPhoneOption, sel: #selector(buildIPhoneChrome)))
         options.append(MyOption(option: gclientSyncOption, sel: #selector(gclientSync)))
         options.append(MyOption(option: runEdgeOption, sel: #selector(runEdge)))
+        options.append(MyOption(option: runEdgeAllOption, sel: #selector(runEdgeAll)))
     }
     
     @objc func setupGN() {
@@ -139,6 +143,19 @@ class ChromiumOperation: NSObject, MyOperation {
     }
     
     @objc func runEdge() {
+        let process = Process()
+        process.launchPath = "/bin/zsh"
+        
+        let cmd = """
+        yzf --gs
+        yzf -b
+        """
+        process.arguments = ["-c", cmd]
+        process.launch()
+        process.waitUntilExit()
+    }
+  
+    @objc func runEdgeAll() {
         let process = Process()
         process.launchPath = "/bin/zsh"
         
