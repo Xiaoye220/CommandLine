@@ -97,7 +97,7 @@ class ChromiumOperation: NSObject, MyOperation {
         
         let cmd = """
         cd out/Debug-iphonesimulator
-        autoninja chrome
+        autoninja chrome -k 100
         """
         process.arguments = ["-c", cmd]
         process.launch()
@@ -110,7 +110,7 @@ class ChromiumOperation: NSObject, MyOperation {
         
         let cmd = """
         cd out/Debug-iphonesimulator
-        autoninja all
+        autoninja all -k 100
         """
         process.arguments = ["-c", cmd]
         process.launch()
@@ -123,7 +123,7 @@ class ChromiumOperation: NSObject, MyOperation {
         
         let cmd = """
         cd out/Debug-iphoneos
-        autoninja chrome
+        autoninja chrome -k 100
         """
         process.arguments = ["-c", cmd]
         process.launch()
