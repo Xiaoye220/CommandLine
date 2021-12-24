@@ -14,9 +14,9 @@ class ShellOperation: NSObject, MyOperation {
     public var options: [MyOption] = []
     
     override init() {
-//        let chmodOption = BoolOption(longFlag: "chmod",
-//                                     helpMessage: "修改文件权限为可访问")
-//        options.append(MyOption(option: chmodOption, sel: #selector(chmod)))
+        let chmodOption = BoolOption(longFlag: "chmod",
+                                     helpMessage: "修改文件权限为可访问")
+        options.append(MyOption(option: chmodOption, sel: #selector(chmod)))
 
         let srcOption = BoolOption(shortFlag: "s",
                                    longFlag: "src",
@@ -44,7 +44,7 @@ class ShellOperation: NSObject, MyOperation {
 
         cd $dir
 
-        chmod a+x "./"$file
+        chmod 777 "./"$file
         """
 
         process.arguments = ["-c", cmd]

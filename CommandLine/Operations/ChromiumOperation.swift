@@ -135,7 +135,7 @@ class ChromiumOperation: NSObject, MyOperation {
         process.launchPath = "/bin/zsh"
         
         let cmd = """
-        gclient sync -D -f
+        gclient sync -D -f --verbose
         """
         process.arguments = ["-c", cmd]
         process.launch()
