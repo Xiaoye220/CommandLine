@@ -33,7 +33,7 @@ class ChromiumOperation: NSObject, MyOperation {
       
         let gclientSyncOption = BoolOption(shortFlag: "g",
                                            longFlag: "gs",
-                                           helpMessage: "gclient sync -D -f")
+                                           helpMessage: "gclient sync -D -f --verbose")
         
         let runEdgeOption = BoolOption(longFlag: "run",
                                        helpMessage: "1.gclient sync \n      2.autoninja chrome")
