@@ -79,7 +79,7 @@ class GitOperation: NSObject, MyOperation {
 
         let cmd = """
         export LANGUAGE=en_US.UTF-8
-        git fetch -p
+        git fetch -p --verbose
         git branch -f main origin/main
         git rebase main
         """
