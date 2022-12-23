@@ -15,9 +15,7 @@
  * limitations under the License.
  */
 
-/**
- * The base class for a command-line option.
- */
+/// The base class for a command-line option.
 public class Option {
   public let shortFlag: String?
   public let longFlag: String?
@@ -44,7 +42,8 @@ public class Option {
     }
   }
 
-  internal init(_ shortFlag: String?, _ longFlag: String?, _ required: Bool, _ helpMessage: String) {
+  internal init(_ shortFlag: String?, _ longFlag: String?, _ required: Bool, _ helpMessage: String)
+  {
     if let sf = shortFlag {
       assert(sf.count == 1, "Short flag must be a single character")
       assert(Int(sf) == nil && sf.toDouble() == nil, "Short flag cannot be a numeric value")
@@ -65,7 +64,9 @@ public class Option {
    */
 
   /** Initializes a new Option that has both long and short flags. */
-  public convenience init(shortFlag: String, longFlag: String, required: Bool = false, helpMessage: String) {
+  public convenience init(
+    shortFlag: String, longFlag: String, required: Bool = false, helpMessage: String
+  ) {
     self.init(shortFlag as String?, longFlag, required, helpMessage)
   }
 
@@ -88,10 +89,8 @@ public class Option {
   }
 }
 
-/**
- * A boolean option. The presence of either the short or long flag will set the value to true;
- * absence of the flag(s) is equivalent to false.
- */
+/// A boolean option. The presence of either the short or long flag will set the value to true;
+/// absence of the flag(s) is equivalent to false.
 public class BoolOption: Option {
   private var _value: Bool = false
 
@@ -109,7 +108,7 @@ public class BoolOption: Option {
   }
 }
 
-/**  An option that accepts a positive or negative integer value. */
+///  An option that accepts a positive or negative integer value.
 public class IntOption: Option {
   private var _value: Int?
 
@@ -139,10 +138,8 @@ public class IntOption: Option {
   }
 }
 
-/**
- * An option that represents an integer counter. Each time the short or long flag is found
- * on the command-line, the counter will be incremented.
- */
+/// An option that represents an integer counter. Each time the short or long flag is found
+/// on the command-line, the counter will be incremented.
 public class CounterOption: Option {
   private var _value: Int = 0
 
@@ -164,7 +161,7 @@ public class CounterOption: Option {
   }
 }
 
-/**  An option that accepts a positive or negative floating-point value. */
+///  An option that accepts a positive or negative floating-point value.
 public class DoubleOption: Option {
   private var _value: Double?
 
@@ -194,7 +191,7 @@ public class DoubleOption: Option {
   }
 }
 
-/**  An option that accepts a string value. */
+///  An option that accepts a string value.
 public class StringOption: Option {
   private var _value: String?
 
@@ -220,7 +217,7 @@ public class StringOption: Option {
   }
 }
 
-/**  An option that accepts one or more string values. */
+///  An option that accepts one or more string values.
 public class MultiStringOption: Option {
   private var _value: [String]?
 
@@ -250,7 +247,7 @@ public class MultiStringOption: Option {
   }
 }
 
-/** An option that represents an enum value. */
+/// An option that represents an enum value.
 public class EnumOption<T: RawRepresentable>: Option where T.RawValue == String {
   private var _value: T?
   public var value: T? {
@@ -269,12 +266,16 @@ public class EnumOption<T: RawRepresentable>: Option where T.RawValue == String 
    * of Xcode 7 beta 2.
    */
 
-  internal override init(_ shortFlag: String?, _ longFlag: String?, _ required: Bool, _ helpMessage: String) {
+  internal override init(
+    _ shortFlag: String?, _ longFlag: String?, _ required: Bool, _ helpMessage: String
+  ) {
     super.init(shortFlag, longFlag, required, helpMessage)
   }
 
   /** Initializes a new Option that has both long and short flags. */
-  public convenience init(shortFlag: String, longFlag: String, required: Bool = false, helpMessage: String) {
+  public convenience init(
+    shortFlag: String, longFlag: String, required: Bool = false, helpMessage: String
+  ) {
     self.init(shortFlag as String?, longFlag, required, helpMessage)
   }
 

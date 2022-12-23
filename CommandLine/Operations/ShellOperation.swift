@@ -8,60 +8,61 @@
 
 import Foundation
 
-
 class ShellOperation: NSObject, MyOperation {
-    
-    public var options: [MyOption] = []
-    
-    override init() {
-        let chmodOption = BoolOption(longFlag: "chmod",
-                                     helpMessage: "修改文件权限为可访问")
-        options.append(MyOption(option: chmodOption, sel: #selector(chmod)))
 
-        let srcOption = BoolOption(shortFlag: "s",
-                                   longFlag: "src",
-                                   helpMessage: "cd to anaheim src")
-        options.append(MyOption(option: srcOption, sel: #selector(cdSrc)))
-    }
-    
-    @objc func chmod() {
-        print("输入文件路径:")
-        // 读取用户输入的值
-        let keyboard = FileHandle.standardInput
-        let inputData = keyboard.availableData
-        var strData = String(data: inputData, encoding: String.Encoding.utf8)!
-        // 删除最后的换行符
-        strData.removeLast()
-        
-        let process = Process()
-        process.launchPath = "/bin/zsh"
+  public var options: [MyOption] = []
 
-        let cmd = """
-        path=\(strData)
+  override init() {
+    let chmodOption = BoolOption(
+      longFlag: "chmod",
+      helpMessage: "修改文件权限为可访问")
+    options.append(MyOption(option: chmodOption, sel: #selector(chmod)))
 
-        dir=${path%/*}
-        file=${path##*/}
+    let srcOption = BoolOption(
+      shortFlag: "s",
+      longFlag: "src",
+      helpMessage: "cd to anaheim src")
+    options.append(MyOption(option: srcOption, sel: #selector(cdSrc)))
+  }
 
-        cd $dir
+  @objc func chmod() {
+    print("输入文件路径:")
+    // 读取用户输入的值
+    let keyboard = FileHandle.standardInput
+    let inputData = keyboard.availableData
+    var strData = String(data: inputData, encoding: String.Encoding.utf8)!
+    // 删除最后的换行符
+    strData.removeLast()
 
-        chmod 777 "./"$file
-        """
+    let process = Process()
+    process.launchPath = "/bin/zsh"
 
-        process.arguments = ["-c", cmd]
-        process.launch()
-        process.waitUntilExit()
-    }
-    
-    @objc func cdSrc() {
-        let process = Process()
-        process.launchPath = "/bin/zsh"
+    let cmd = """
+      path=\(strData)
 
-        let cmd = """
-        cd ~/Desktop/anaheim/src
-        """
+      dir=${path%/*}
+      file=${path##*/}
 
-        process.arguments = ["-c", cmd]
-        process.launch()
-        process.waitUntilExit()
-    }
+      cd $dir
+
+      chmod 777 "./"$file
+      """
+
+    process.arguments = ["-c", cmd]
+    process.launch()
+    process.waitUntilExit()
+  }
+
+  @objc func cdSrc() {
+    let process = Process()
+    process.launchPath = "/bin/zsh"
+
+    let cmd = """
+      cd ~/Desktop/anaheim/src
+      """
+
+    process.arguments = ["-c", cmd]
+    process.launch()
+    process.waitUntilExit()
+  }
 }

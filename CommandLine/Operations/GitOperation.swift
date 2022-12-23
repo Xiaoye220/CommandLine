@@ -9,102 +9,106 @@
 import Foundation
 
 class GitOperation: NSObject, MyOperation {
-    
-    public var options: [MyOption] = []
-    
-    override init() {
-        let addTagOption = StringOption(shortFlag: "a",
-                                        longFlag: "add-tag",
-                                        helpMessage: "--add-tag [tag]，给 git 添加 tag，已存在则删除原有的再次添加")
 
-        let msFormatOption = BoolOption(shortFlag: "f",
-                                        longFlag: "format",
-                                        helpMessage: "git ms format --upstream=origin/main")
+  public var options: [MyOption] = []
 
-        let rebaseMasterOption = BoolOption(shortFlag: "r",
-                                            longFlag: "rebase",
-                                            helpMessage: "rebase to main")
+  override init() {
+    let addTagOption = StringOption(
+      shortFlag: "a",
+      longFlag: "add-tag",
+      helpMessage: "--add-tag [tag]，给 git 添加 tag，已存在则删除原有的再次添加")
 
-        let presubmitOption = BoolOption(shortFlag: "p",
-                                         longFlag: "presubmit",
-                                         helpMessage: "git ms presubmit origin/main")
+    let msFormatOption = BoolOption(
+      shortFlag: "f",
+      longFlag: "format",
+      helpMessage: "git ms format --upstream=origin/main")
 
-        options.append(MyOption(option: addTagOption, sel: #selector(addTag(_:))))
-        options.append(MyOption(option: msFormatOption, sel: #selector(msFormat)))
-        options.append(MyOption(option: rebaseMasterOption, sel: #selector(rebaseMaster)))
-        options.append(MyOption(option: presubmitOption, sel: #selector(presubmit)))
-    }
-    
-    @objc func addTag(_ tag: String) {
-        let process = Process()
-        process.launchPath = "/bin/zsh"
-        
-        let cmd = """
-        export LANGUAGE=en_US.UTF-8
+    let rebaseMasterOption = BoolOption(
+      shortFlag: "r",
+      longFlag: "rebase",
+      helpMessage: "rebase to main")
 
-        tag=\(tag)
-        
-        git pull --tags
-        existTag=$(git tag -l | grep $tag)
-        
-        if [ "${existTag}" != "" ]
-        then
-        
-        git tag -d ${tag}
-        git push origin :refs/tags/${tag}
-        
-        fi
-        
-        git tag -a ${tag} -m ${tag}
-        git push origin --tags
-        """
-        
-        process.arguments = ["-c", cmd]
-        process.launch()
-        process.waitUntilExit()
-    }
+    let presubmitOption = BoolOption(
+      shortFlag: "p",
+      longFlag: "presubmit",
+      helpMessage: "git ms presubmit origin/main")
 
-    @objc func msFormat() {
-        let process = Process()
-        process.launchPath = "/bin/zsh"
+    options.append(MyOption(option: addTagOption, sel: #selector(addTag(_:))))
+    options.append(MyOption(option: msFormatOption, sel: #selector(msFormat)))
+    options.append(MyOption(option: rebaseMasterOption, sel: #selector(rebaseMaster)))
+    options.append(MyOption(option: presubmitOption, sel: #selector(presubmit)))
+  }
 
-        let cmd = """
-        export LANGUAGE=en_US.UTF-8
-        git ms format --upstream=origin/main
-        """
+  @objc func addTag(_ tag: String) {
+    let process = Process()
+    process.launchPath = "/bin/zsh"
 
-        process.arguments = ["-c", cmd]
-        process.launch()
-        process.waitUntilExit()
-    }
+    let cmd = """
+      export LANGUAGE=en_US.UTF-8
 
-    @objc func rebaseMaster() {
-        let process = Process()
-        process.launchPath = "/bin/zsh"
+      tag=\(tag)
 
-        let cmd = """
-        export LANGUAGE=en_US.UTF-8
-        git fetch -p --verbose
-        git branch -f main origin/main
-        git rebase main
-        """
+      git pull --tags
+      existTag=$(git tag -l | grep $tag)
 
-        process.arguments = ["-c", cmd]
-        process.launch()
-        process.waitUntilExit()
-    }
-  
-    @objc func presubmit() {
-        let process = Process()
-        process.launchPath = "/bin/zsh"
+      if [ "${existTag}" != "" ]
+      then
 
-        let cmd = """
-        export LANGUAGE=en_US.UTF-8
-        git ms presubmit origin/main
-        """
+      git tag -d ${tag}
+      git push origin :refs/tags/${tag}
 
-        process.arguments = ["-c", cmd]
-        process.launch()
-        process.waitUntilExit()
-    }
+      fi
+
+      git tag -a ${tag} -m ${tag}
+      git push origin --tags
+      """
+
+    process.arguments = ["-c", cmd]
+    process.launch()
+    process.waitUntilExit()
+  }
+
+  @objc func msFormat() {
+    let process = Process()
+    process.launchPath = "/bin/zsh"
+
+    let cmd = """
+      export LANGUAGE=en_US.UTF-8
+      git ms format --upstream=origin/main
+      """
+
+    process.arguments = ["-c", cmd]
+    process.launch()
+    process.waitUntilExit()
+  }
+
+  @objc func rebaseMaster() {
+    let process = Process()
+    process.launchPath = "/bin/zsh"
+
+    let cmd = """
+      export LANGUAGE=en_US.UTF-8
+      git fetch -p --verbose
+      git branch -f main origin/main
+      git rebase main
+      """
+
+    process.arguments = ["-c", cmd]
+    process.launch()
+    process.waitUntilExit()
+  }
+
+  @objc func presubmit() {
+    let process = Process()
+    process.launchPath = "/bin/zsh"
+
+    let cmd = """
+      export LANGUAGE=en_US.UTF-8
+      git ms presubmit origin/main
+      """
+
+    process.arguments = ["-c", cmd]
+    process.launch()
+    process.waitUntilExit()
+  }
 }

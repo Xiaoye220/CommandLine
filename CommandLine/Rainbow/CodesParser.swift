@@ -27,47 +27,47 @@
 typealias ParseResult = (color: Color?, backgroundColor: BackgroundColor?, styles: [Style]?)
 
 protocol CodesParser {
-    associatedtype SourceType
-    func parse(modeCodes codes: [SourceType]) -> ParseResult
+  associatedtype SourceType
+  func parse(modeCodes codes: [SourceType]) -> ParseResult
 }
 
 struct ConsoleCodesParser: CodesParser {
-    func parse(modeCodes codes: [UInt8]) -> ParseResult {
-        var color: Color? = nil
-        var backgroundColor: BackgroundColor? = nil
-        var styles: [Style]? = nil
-        
-        for code in codes {
-            if let c = Color(rawValue: code) {
-                color = c
-            } else if let bg = BackgroundColor(rawValue: code) {
-                backgroundColor = bg
-            } else if let style = Style(rawValue: code) {
-                if styles == nil {
-                    styles = []
-                }
-                styles!.append(style)
-            }
+  func parse(modeCodes codes: [UInt8]) -> ParseResult {
+    var color: Color? = nil
+    var backgroundColor: BackgroundColor? = nil
+    var styles: [Style]? = nil
+
+    for code in codes {
+      if let c = Color(rawValue: code) {
+        color = c
+      } else if let bg = BackgroundColor(rawValue: code) {
+        backgroundColor = bg
+      } else if let style = Style(rawValue: code) {
+        if styles == nil {
+          styles = []
         }
-        
-        return (color, backgroundColor, styles)
+        styles!.append(style)
+      }
     }
+
+    return (color, backgroundColor, styles)
+  }
 }
 
 struct XcodeColorsCodesParser: CodesParser {
 
-    func parse(modeCodes codes: [String]) -> ParseResult {
-        var color: Color? = nil
-        var backgroundColor: BackgroundColor? = nil
-        
-        for code in codes {
-            if let c = Color(xcodeColorsDescription: code) {
-                color = c
-            } else if let bg = BackgroundColor(xcodeColorsDescription: code) {
-                backgroundColor = bg
-            }
-        }
-        
-        return (color, backgroundColor, nil)
+  func parse(modeCodes codes: [String]) -> ParseResult {
+    var color: Color? = nil
+    var backgroundColor: BackgroundColor? = nil
+
+    for code in codes {
+      if let c = Color(xcodeColorsDescription: code) {
+        color = c
+      } else if let bg = BackgroundColor(xcodeColorsDescription: code) {
+        backgroundColor = bg
+      }
     }
+
+    return (color, backgroundColor, nil)
+  }
 }

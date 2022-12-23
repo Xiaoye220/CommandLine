@@ -25,61 +25,61 @@
 //  THE SOFTWARE.
 
 protocol ModesExtractor {
-    associatedtype ResultType
-    func extract(_ string: String) -> (codes: [ResultType], text: String)
+  associatedtype ResultType
+  func extract(_ string: String) -> (codes: [ResultType], text: String)
 }
 
 struct ConsoleModesExtractor: ModesExtractor {
-    func extract(_ string: String) -> (codes: [UInt8], text: String) {
-        let token = ControlCode.CSI
-        
-        var index = string.index(string.startIndex, offsetBy: token.count)
-        var codesString = ""
-        while string[index] != "m" {
-            codesString.append(string[index])
-            index = string.index(after: index)
-        }
-        #if swift(>=4.1)
-        let codes = codesString.split(separator: ";", omittingEmptySubsequences: false)
-            .compactMap { UInt8($0) }
-        #else
-        let codes = codesString.split(separator: ";", omittingEmptySubsequences: false)
-            .flatMap { UInt8($0) }
-        #endif
-        let startIndex = string.index(after: index)
-        let endIndex = string.index(string.endIndex, offsetBy: -"\(token)0m".count)
-        let text = String(string[startIndex ..< endIndex])
-        
-        return (codes, text)
+  func extract(_ string: String) -> (codes: [UInt8], text: String) {
+    let token = ControlCode.CSI
+
+    var index = string.index(string.startIndex, offsetBy: token.count)
+    var codesString = ""
+    while string[index] != "m" {
+      codesString.append(string[index])
+      index = string.index(after: index)
     }
+    #if swift(>=4.1)
+      let codes = codesString.split(separator: ";", omittingEmptySubsequences: false)
+        .compactMap { UInt8($0) }
+    #else
+      let codes = codesString.split(separator: ";", omittingEmptySubsequences: false)
+        .flatMap { UInt8($0) }
+    #endif
+    let startIndex = string.index(after: index)
+    let endIndex = string.index(string.endIndex, offsetBy: -"\(token)0m".count)
+    let text = String(string[startIndex..<endIndex])
+
+    return (codes, text)
+  }
 }
 
 struct XcodeColorsModesExtractor: ModesExtractor {
-    func extract(_ string: String) -> (codes: [String], text: String) {
-        let token = ControlCode.CSI
-        var index = string.startIndex
-        
-        var codes = [String]()
-        
-        var outer = String(string[index]) //Start index should be the ESC control code
-        while outer == ControlCode.ESC {
-            var codesString = ""
-            index = string.index(index, offsetBy: token.count)
-            
-            while string[index] != ";" {
-                codesString.append(string[index])
-                index = string.index(after: index)
-            }
-            
-            codes.append(codesString)
-            index = string.index(after: index)
-            outer = String(string[index])
-        }
-        
-        let startIndex = index
-        let endIndex = string.index(string.endIndex, offsetBy: -"\(token);".count)
-        let text = String(string[startIndex ..< endIndex])
-        
-        return (codes, text)
+  func extract(_ string: String) -> (codes: [String], text: String) {
+    let token = ControlCode.CSI
+    var index = string.startIndex
+
+    var codes = [String]()
+
+    var outer = String(string[index])  //Start index should be the ESC control code
+    while outer == ControlCode.ESC {
+      var codesString = ""
+      index = string.index(index, offsetBy: token.count)
+
+      while string[index] != ";" {
+        codesString.append(string[index])
+        index = string.index(after: index)
+      }
+
+      codes.append(codesString)
+      index = string.index(after: index)
+      outer = String(string[index])
     }
+
+    let startIndex = index
+    let endIndex = string.index(string.endIndex, offsetBy: -"\(token);".count)
+    let text = String(string[startIndex..<endIndex])
+
+    return (codes, text)
+  }
 }

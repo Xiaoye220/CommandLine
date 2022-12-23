@@ -25,6 +25,6 @@
 //  THE SOFTWARE.
 
 struct ControlCode {
-    static let ESC = "\u{001B}"
-    static let CSI = "\(ESC)["
+  static let ESC = "\u{001B}"
+  static let CSI = "\(ESC)["
 }

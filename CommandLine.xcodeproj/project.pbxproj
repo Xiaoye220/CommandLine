@@ -215,7 +215,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\ncp $BUILT_PRODUCTS_DIR/$PRODUCT_NAME /usr/local/bin/yzf\n";
+			shellScript = "if which swift-format >/dev/null; then\n    swift-format format -i -r --configuration ${PROJECT_DIR}/.swift-format ${PROJECT_DIR}\nelse\n    echo \"warning: swift-format not installed\"\nfi\n\n# Type a script or drag a script file from your workspace to insert its path.\ncp $BUILT_PRODUCTS_DIR/$PRODUCT_NAME /usr/local/bin/yzf\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
