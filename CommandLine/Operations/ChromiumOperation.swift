@@ -16,7 +16,7 @@ class ChromiumOperation: NSObject, MyOperation {
                                        helpMessage: "ios/build/tools/setup-gn.py")
 
         let startGomaOption = BoolOption(longFlag: "goma",
-                                         helpMessage: "vpython ~/Desktop/anaheim/tools/goma-mac/goma_ctl.py ensure_start")
+                                         helpMessage: "vpython ~/Desktop/anaheim/depot_tools/.cipd_bin/goma_ctl.py ensure_start")
         let openXcodeOption = BoolOption(shortFlag: "o",
                                          longFlag: "xcode",
                                          helpMessage: "open Xcode")
@@ -69,8 +69,12 @@ class ChromiumOperation: NSObject, MyOperation {
         let process = Process()
         process.launchPath = "/bin/zsh"
 
+//        let cmd = """
+//        vpython ~/Desktop/anaheim/tools/goma-mac/goma_ctl.py ensure_start
+//        """
+      
         let cmd = """
-        vpython ~/Desktop/anaheim/tools/goma-mac/goma_ctl.py ensure_start
+        vpython ~/Desktop/anaheim/depot_tools/.cipd_bin/goma_ctl.py ensure_start
         """
 
         process.arguments = ["-c", cmd]

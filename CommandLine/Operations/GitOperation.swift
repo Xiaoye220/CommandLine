@@ -25,9 +25,14 @@ class GitOperation: NSObject, MyOperation {
                                             longFlag: "rebase",
                                             helpMessage: "rebase to main")
 
+        let presubmitOption = BoolOption(shortFlag: "p",
+                                         longFlag: "presubmit",
+                                         helpMessage: "git ms presubmit origin/main")
+
         options.append(MyOption(option: addTagOption, sel: #selector(addTag(_:))))
         options.append(MyOption(option: msFormatOption, sel: #selector(msFormat)))
         options.append(MyOption(option: rebaseMasterOption, sel: #selector(rebaseMaster)))
+        options.append(MyOption(option: presubmitOption, sel: #selector(presubmit)))
     }
     
     @objc func addTag(_ tag: String) {
@@ -82,6 +87,20 @@ class GitOperation: NSObject, MyOperation {
         git fetch -p --verbose
         git branch -f main origin/main
         git rebase main
+        """
+
+        process.arguments = ["-c", cmd]
+        process.launch()
+        process.waitUntilExit()
+    }
+  
+    @objc func presubmit() {
+        let process = Process()
+        process.launchPath = "/bin/zsh"
+
+        let cmd = """
+        export LANGUAGE=en_US.UTF-8
+        git ms presubmit origin/main
         """
 
         process.arguments = ["-c", cmd]
