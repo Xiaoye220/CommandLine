@@ -23,6 +23,14 @@ class GitOperation: NSObject, MyOperation {
       longFlag: "format",
       helpMessage: "git ms format --upstream=origin/main")
 
+    let msFormatLatestCommitOption = BoolOption(
+      longFlag: "fl",
+      helpMessage: "git ms format --upstream=HEAD^")
+
+    let msFormatPythonOption = BoolOption(
+      longFlag: "fy",
+      helpMessage: "git ms format --python --full --upstream=origin/main")
+
     let rebaseMasterOption = BoolOption(
       shortFlag: "r",
       longFlag: "rebase",
@@ -33,10 +41,18 @@ class GitOperation: NSObject, MyOperation {
       longFlag: "presubmit",
       helpMessage: "git ms presubmit origin/main")
 
+    let presubmitOnCommitOption = BoolOption(
+      longFlag: "pc",
+      helpMessage: "git ms presubmit --commit")
+
     options.append(MyOption(option: addTagOption, sel: #selector(addTag(_:))))
     options.append(MyOption(option: msFormatOption, sel: #selector(msFormat)))
+    options.append(
+      MyOption(option: msFormatLatestCommitOption, sel: #selector(msFormatLatestCommit)))
+    options.append(MyOption(option: msFormatPythonOption, sel: #selector(msFormatPython)))
     options.append(MyOption(option: rebaseMasterOption, sel: #selector(rebaseMaster)))
     options.append(MyOption(option: presubmitOption, sel: #selector(presubmit)))
+    options.append(MyOption(option: presubmitOnCommitOption, sel: #selector(presubmitOnCommit)))
   }
 
   @objc func addTag(_ tag: String) {
@@ -82,6 +98,34 @@ class GitOperation: NSObject, MyOperation {
     process.waitUntilExit()
   }
 
+  @objc func msFormatLatestCommit() {
+    let process = Process()
+    process.launchPath = "/bin/zsh"
+
+    let cmd = """
+      export LANGUAGE=en_US.UTF-8
+      git ms format --upstream=HEAD^
+      """
+
+    process.arguments = ["-c", cmd]
+    process.launch()
+    process.waitUntilExit()
+  }
+
+  @objc func msFormatPython() {
+    let process = Process()
+    process.launchPath = "/bin/zsh"
+
+    let cmd = """
+      export LANGUAGE=en_US.UTF-8
+      git ms format --python --full --upstream=origin/main
+      """
+
+    process.arguments = ["-c", cmd]
+    process.launch()
+    process.waitUntilExit()
+  }
+
   @objc func rebaseMaster() {
     let process = Process()
     process.launchPath = "/bin/zsh"
@@ -105,6 +149,20 @@ class GitOperation: NSObject, MyOperation {
     let cmd = """
       export LANGUAGE=en_US.UTF-8
       git ms presubmit origin/main
+      """
+
+    process.arguments = ["-c", cmd]
+    process.launch()
+    process.waitUntilExit()
+  }
+
+  @objc func presubmitOnCommit() {
+    let process = Process()
+    process.launchPath = "/bin/zsh"
+
+    let cmd = """
+      export LANGUAGE=en_US.UTF-8
+      git ms presubmit --commit
       """
 
     process.arguments = ["-c", cmd]
