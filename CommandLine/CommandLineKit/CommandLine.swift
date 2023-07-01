@@ -38,17 +38,15 @@ private struct StderrOutputStream: TextOutputStream {
   }
 }
 
-/**
- * The CommandLine class implements a command-line interface for your app.
- *
- * To use it, define one or more Options (see Option.swift) and add them to your
- * CommandLine object, then invoke `parse()`. Each Option object will be populated with
- * the value given by the user.
- *
- * If any required options are missing or if an invalid value is found, `parse()` will throw
- * a `ParseError`. You can then call `printUsage()` to output an automatically-generated usage
- * message.
- */
+/// The CommandLine class implements a command-line interface for your app.
+///
+/// To use it, define one or more Options (see Option.swift) and add them to your
+/// CommandLine object, then invoke `parse()`. Each Option object will be populated with
+/// the value given by the user.
+///
+/// If any required options are missing or if an invalid value is found, `parse()` will throw
+/// a `ParseError`. You can then call `printUsage()` to output an automatically-generated usage
+/// message.
 public class CommandLine {
   private var _arguments: [String]
   private var _options: [Option] = [Option]()
@@ -197,15 +195,16 @@ public class CommandLine {
       args.append(a)
     }
 
-    for i in flagIndex + 1 ..< _arguments.count {
+    for i in flagIndex + 1..<_arguments.count {
       if !skipFlagChecks {
         if _arguments[i] == argumentStopper {
           skipFlagChecks = true
           continue
         }
 
-        if _arguments[i].hasPrefix(shortOptionPrefix) && Int(_arguments[i]) == nil &&
-          _arguments[i].toDouble() == nil {
+        if _arguments[i].hasPrefix(shortOptionPrefix) && Int(_arguments[i]) == nil
+          && _arguments[i].toDouble() == nil
+        {
           break
         }
       }
@@ -300,8 +299,8 @@ public class CommandLine {
         continue
       }
 
-      let skipChars = arg.hasPrefix(longOptionPrefix) ?
-        longOptionPrefix.count : shortOptionPrefix.count
+      let skipChars =
+        arg.hasPrefix(longOptionPrefix) ? longOptionPrefix.count : shortOptionPrefix.count
       let flagWithArg = arg[arg.index(arg.startIndex, offsetBy: skipChars)..<arg.endIndex]
 
       /* The argument contained nothing but ShortOptionPrefix or LongOptionPrefix */

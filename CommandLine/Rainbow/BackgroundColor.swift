@@ -26,17 +26,17 @@
 
 /// Valid background colors to use in `Rainbow`.
 public enum BackgroundColor: UInt8, ModeCode {
-    case black = 40
-    case red
-    case green
-    case yellow
-    case blue
-    case magenta
-    case cyan
-    case white
-    case `default` = 49
-    
-    public var value: UInt8 {
-        return rawValue
-    }
+  case black = 40
+  case red
+  case green
+  case yellow
+  case blue
+  case magenta
+  case cyan
+  case white
+  case `default` = 49
+
+  public var value: UInt8 {
+    return rawValue
+  }
 }

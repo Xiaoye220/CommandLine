@@ -26,79 +26,78 @@
 
 import Foundation
 
-/**
- A Mode code represnet a component for colorizing the string.
- It could be a `Color`, a `BackgroundColor` or a `Style`
- */
+/// A Mode code represnet a component for colorizing the string.
+/// It could be a `Color`, a `BackgroundColor` or a `Style`
 public protocol ModeCode {
-    var value: UInt8 { get }
+  var value: UInt8 { get }
 }
 
-/**
- Setting for `Rainbow`.
- */
+/// Setting for `Rainbow`.
 public struct Rainbow {
-    
-    /// Output target for `Rainbow`. `Rainbow` should detect correct target itself, so you rarely need to set it. 
-    /// However, if you want the colorized string to be different, or the detection is not correct, you can set it manually.
-    public static var outputTarget = OutputTarget.current
-    
-    /// Enable `Rainbow` to colorize string or not. Default is `true`.
-    public static var enabled = true
-    
-    public static func extractModes(for string: String)
-        -> (color: Color?, backgroundColor: BackgroundColor?, styles: [Style]?, text: String)
-    {
-        if string.isConsoleStyle {
-            let result = ConsoleModesExtractor().extract(string)
-            let (color, backgroundColor, styles) = ConsoleCodesParser().parse(modeCodes: result.codes)
-            return (color, backgroundColor, styles, result.text)
-        } else if string.isXcodeColorsStyle {
-            let result = XcodeColorsModesExtractor().extract(string)
-            let (color, backgroundColor, _) = XcodeColorsCodesParser().parse(modeCodes: result.codes)
-            return (color, backgroundColor, nil, result.text)
-        } else {
-            return (nil, nil, nil, string)
-        }
+
+  /// Output target for `Rainbow`. `Rainbow` should detect correct target itself, so you rarely need to set it.
+  /// However, if you want the colorized string to be different, or the detection is not correct, you can set it manually.
+  public static var outputTarget = OutputTarget.current
+
+  /// Enable `Rainbow` to colorize string or not. Default is `true`.
+  public static var enabled = true
+
+  public static func extractModes(for string: String)
+    -> (color: Color?, backgroundColor: BackgroundColor?, styles: [Style]?, text: String)
+  {
+    if string.isConsoleStyle {
+      let result = ConsoleModesExtractor().extract(string)
+      let (color, backgroundColor, styles) = ConsoleCodesParser().parse(modeCodes: result.codes)
+      return (color, backgroundColor, styles, result.text)
+    } else if string.isXcodeColorsStyle {
+      let result = XcodeColorsModesExtractor().extract(string)
+      let (color, backgroundColor, _) = XcodeColorsCodesParser().parse(modeCodes: result.codes)
+      return (color, backgroundColor, nil, result.text)
+    } else {
+      return (nil, nil, nil, string)
+    }
+  }
+
+  static func generateString(
+    forColor color: Color?,
+    backgroundColor: BackgroundColor?,
+    styles: [Style]?,
+    text: String
+  ) -> String {
+    guard enabled else {
+      return text
     }
 
-    static func generateString(forColor color: Color?,
-                             backgroundColor: BackgroundColor?,
-                                      styles: [Style]?,
-                                        text: String) -> String
-    {
-        guard enabled else {
-            return text
-        }
-        
-        switch outputTarget {
-        case .xcodeColors:
-            return XcodeColorsStringGenerator()
-                .generate(withStringColor: color,
-                          backgroundColor: backgroundColor,
-                          styles: styles,
-                          text: text)
-        case .console:
-            return ConsoleStringGenerator()
-                .generate(withStringColor: color,
-                          backgroundColor: backgroundColor,
-                          styles: styles,
-                          text: text)
-        case .unknown:
-            return text
-        }
+    switch outputTarget {
+    case .xcodeColors:
+      return XcodeColorsStringGenerator()
+        .generate(
+          withStringColor: color,
+          backgroundColor: backgroundColor,
+          styles: styles,
+          text: text)
+    case .console:
+      return ConsoleStringGenerator()
+        .generate(
+          withStringColor: color,
+          backgroundColor: backgroundColor,
+          styles: styles,
+          text: text)
+    case .unknown:
+      return text
     }
-    
+  }
+
 }
 
-private extension String {
-    var isConsoleStyle: Bool {
-        let token = ControlCode.CSI
-        return hasPrefix(token) && hasSuffix("\(token)0m")
-    }
-    
-    var isXcodeColorsStyle: Bool {
-        let token = ControlCode.CSI
-        return hasPrefix(token) && hasSuffix("\(token);")
-    }
+extension String {
+  fileprivate var isConsoleStyle: Bool {
+    let token = ControlCode.CSI
+    return hasPrefix(token) && hasSuffix("\(token)0m")
+  }
+
+  fileprivate var isXcodeColorsStyle: Bool {
+    let token = ControlCode.CSI
+    return hasPrefix(token) && hasSuffix("\(token);")
+  }
 }

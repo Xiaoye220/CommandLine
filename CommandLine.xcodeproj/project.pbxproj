@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -26,6 +26,7 @@
 		2FFE07B922D739B100693D63 /* Option.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FFE07B622D739B100693D63 /* Option.swift */; };
 		2FFE07BA22D739B100693D63 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FFE07B722D739B100693D63 /* StringExtensions.swift */; };
 		2FFE07BC22D73F3100693D63 /* GitOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FFE07BB22D73F3100693D63 /* GitOperation.swift */; };
+		8EDB412023B33A95002754F7 /* ChromiumOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDB411F23B33A95002754F7 /* ChromiumOperation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -62,6 +63,7 @@
 		2FFE07B622D739B100693D63 /* Option.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Option.swift; sourceTree = "<group>"; };
 		2FFE07B722D739B100693D63 /* StringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		2FFE07BB22D73F3100693D63 /* GitOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitOperation.swift; sourceTree = "<group>"; };
+		8EDB411F23B33A95002754F7 /* ChromiumOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChromiumOperation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,11 +96,10 @@
 		2F469A0322D5E22200A93D64 /* CommandLine */ = {
 			isa = PBXGroup;
 			children = (
+				8EDB411E23B33A4F002754F7 /* Operations */,
 				2FFE07B422D739B100693D63 /* CommandLineKit */,
 				2FFE079C22D739AA00693D63 /* Rainbow */,
 				2F469A0422D5E22200A93D64 /* main.swift */,
-				2FFE07BB22D73F3100693D63 /* GitOperation.swift */,
-				2F6F63E022FD212600D6A967 /* ShellOperation.swift */,
 				2F6F63E222FD232E00D6A967 /* MyOption.swift */,
 				2F6F63E422FD252B00D6A967 /* MyOperation.swift */,
 			);
@@ -132,6 +133,16 @@
 				2FFE07B722D739B100693D63 /* StringExtensions.swift */,
 			);
 			path = CommandLineKit;
+			sourceTree = "<group>";
+		};
+		8EDB411E23B33A4F002754F7 /* Operations */ = {
+			isa = PBXGroup;
+			children = (
+				2FFE07BB22D73F3100693D63 /* GitOperation.swift */,
+				2F6F63E022FD212600D6A967 /* ShellOperation.swift */,
+				8EDB411F23B33A95002754F7 /* ChromiumOperation.swift */,
+			);
+			path = Operations;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -190,6 +201,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		2FFE07BD22D740AF00693D63 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -203,7 +215,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\ncp $BUILT_PRODUCTS_DIR/$PRODUCT_NAME /usr/local/bin/yzf\n";
+			shellScript = "if which swift-format >/dev/null; then\n    swift-format format -i -r --configuration ${PROJECT_DIR}/.swift-format ${PROJECT_DIR}\nelse\n    echo \"warning: swift-format not installed\"\nfi\n\n# Type a script or drag a script file from your workspace to insert its path.\ncp $BUILT_PRODUCTS_DIR/$PRODUCT_NAME /usr/local/bin/yzf\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -227,6 +239,7 @@
 				2FFE07B022D739AA00693D63 /* XcodeColorsSupport.swift in Sources */,
 				2FFE07B222D739AA00693D63 /* String+Rainbow.swift in Sources */,
 				2FFE07AB22D739AA00693D63 /* CodesParser.swift in Sources */,
+				8EDB412023B33A95002754F7 /* ChromiumOperation.swift in Sources */,
 				2F6F63E322FD232E00D6A967 /* MyOption.swift in Sources */,
 				2FFE07BA22D739B100693D63 /* StringExtensions.swift in Sources */,
 				2FFE07AE22D739AA00693D63 /* Rainbow.swift in Sources */,
@@ -356,7 +369,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = B5ZRU68637;
+				DEVELOPMENT_TEAM = L6AM4B62AR;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
@@ -366,7 +379,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = B5ZRU68637;
+				DEVELOPMENT_TEAM = L6AM4B62AR;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};

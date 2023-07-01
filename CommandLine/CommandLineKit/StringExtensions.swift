@@ -22,7 +22,7 @@
   import Glibc
 #endif
 
-internal extension String {
+extension String {
   /* Retrieves locale-specified decimal separator from the environment
    * using localeconv(3).
    */
