@@ -18,7 +18,7 @@ class ChromiumOperation: NSObject, MyOperation {
 
     let startGomaOption = BoolOption(
       longFlag: "goma",
-      helpMessage: "vpython ~/Desktop/anaheim/depot_tools/.cipd_bin/goma_ctl.py ensure_start")
+      helpMessage: "goma_ctl ensure_start")
 
     let openXcodeOption = BoolOption(
       shortFlag: "o",
@@ -29,6 +29,11 @@ class ChromiumOperation: NSObject, MyOperation {
       shortFlag: "b",
       longFlag: "build",
       helpMessage: "Build chrome for simulator with 'autoninja chrome'")
+
+    let profileOption = BoolOption(
+      shortFlag: "i",
+      longFlag: "profile",
+      helpMessage: "Profile chrome for iPhone device with 'autoninja chrome'")
 
     let buildAllOption = BoolOption(
       longFlag: "ba",
@@ -55,6 +60,7 @@ class ChromiumOperation: NSObject, MyOperation {
     options.append(MyOption(option: startGomaOption, sel: #selector(startGoma)))
     options.append(MyOption(option: openXcodeOption, sel: #selector(openXcode)))
     options.append(MyOption(option: buildOption, sel: #selector(buildChrome)))
+    options.append(MyOption(option: profileOption, sel: #selector(profileChrome)))
     options.append(MyOption(option: buildAllOption, sel: #selector(buildAllChrome)))
     options.append(MyOption(option: buildIPhoneOption, sel: #selector(buildIPhoneChrome)))
     options.append(MyOption(option: gclientSyncOption, sel: #selector(gclientSync)))
@@ -80,7 +86,7 @@ class ChromiumOperation: NSObject, MyOperation {
     process.launchPath = "/bin/zsh"
 
     let cmd = """
-      vpython ~/Desktop/anaheim/depot_tools/.cipd_bin/goma_ctl.py ensure_start
+      goma_ctl ensure_start
       """
 
     process.arguments = ["-c", cmd]
@@ -107,6 +113,19 @@ class ChromiumOperation: NSObject, MyOperation {
 
     let cmd = """
       cd out/Debug-iphonesimulator
+      autoninja chrome -k 100
+      """
+    process.arguments = ["-c", cmd]
+    process.launch()
+    process.waitUntilExit()
+  }
+
+  @objc func profileChrome() {
+    let process = Process()
+    process.launchPath = "/bin/zsh"
+
+    let cmd = """
+      cd out/Profile-iphoneos
       autoninja chrome -k 100
       """
     process.arguments = ["-c", cmd]
